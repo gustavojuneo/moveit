@@ -11,6 +11,8 @@
 
 ## Explicação da Solução
 
+<img src="./public/screenshot.png">
+
 Esse projeto tem como objetivo registrar os estudos da Next Level Week fornecida pela [Rocketseat](https://rocketseat.com.br/), um aplicativo baseado no método Pomodoro, para efetuar ciclos de estudo e passar de nivel de acordo com o seu aprendizado, podendo colocar novos desafios a medida da evolução.
 
 ## Tecnologias Usadas
