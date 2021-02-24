@@ -15,6 +15,8 @@
 
 Esse projeto tem como objetivo registrar os estudos da Next Level Week fornecida pela [Rocketseat](https://rocketseat.com.br/), um aplicativo baseado no método Pomodoro, para efetuar ciclos de estudo e passar de nivel de acordo com o seu aprendizado, podendo colocar novos desafios a medida da evolução.
 
+ O projeto está hospedado na vercel e você pode visualiza-lo e testar as funcionalidades acessando o site [Move.it](https://imoveit.vercel.app).
+
 ## Tecnologias Usadas
 
 As tecnologias utilizadas nesta Aplicação são:
