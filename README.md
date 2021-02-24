@@ -1,5 +1,7 @@
-# Move.it
-
+<div align="center">
+  <img src="./public/logo-full.svg">
+</div>
+<br />
 <p align="center">
   <a href="#explicação-da-solução">Explicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias-usadas">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -39,7 +41,7 @@ yarn install
 ```
 ou
 
-caso não utilize o Yarn você pode utilizar o npm, basta remover o arquivo yarn.lock de dentro da pasta e rodar o seguir comando.
+caso não utilize o Yarn você pode utilizar o npm, basta remover o arquivo yarn.lock de dentro da pasta e rodar o seguinte comando:
 ```bash
 npm install
 ``` 
