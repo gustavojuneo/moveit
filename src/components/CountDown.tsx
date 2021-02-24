@@ -1,4 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
+import { MdPlayArrow, MdClose, MdCheckCircle } from 'react-icons/md'
+
 import { ChallengesContext } from '../contexts/ChallengesContext'
 
 import styles from '../styles/components/CountDown.module.css'
@@ -57,6 +59,7 @@ export function CountDown() {
       {hasFinished ? (
         <button disabled type="button" className={`${styles.countDownButton}`}>
           Ciclo encerrado
+          <MdCheckCircle size={24} />
         </button>
       ) : (
         <>
@@ -67,6 +70,7 @@ export function CountDown() {
               onClick={resetCountDown}
             >
               Abandonar ciclo
+              <MdClose size={24} />
             </button>
           ) : (
             <button
@@ -75,6 +79,7 @@ export function CountDown() {
               onClick={startCountDown}
             >
               Iniciar um ciclo
+              <MdPlayArrow size={24} />
             </button>
           )}
         </>

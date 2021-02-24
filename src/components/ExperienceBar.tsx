@@ -1,4 +1,6 @@
 import { useContext } from 'react'
+import { MdKeyboardArrowUp } from 'react-icons/md'
+
 import { ChallengesContext } from '../contexts/ChallengesContext'
 import styles from '../styles/components/ExperienceBar.module.css'
 
@@ -14,14 +16,15 @@ export function ExperienceBar() {
     <header className={styles.experienceBar}>
       <span>0 xp</span>
       <div>
-        <div style={{ width: `${percentToNextLevel}` }} />
+        <div style={{ width: `${percentToNextLevel}%` }} />
 
-        <span
+        <p
           className={styles.currentExperience}
-          style={{ left: `${percentToNextLevel}` }}
+          style={{ left: `${percentToNextLevel}%` }}
         >
-          ^<span>{currentExperience} xp</span>
-        </span>
+          <MdKeyboardArrowUp size={18} />
+          <span>{currentExperience} xp</span>
+        </p>
       </div>
       <span>{experienceToNextLevel} xp</span>
     </header>
