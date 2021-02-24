@@ -38,6 +38,8 @@ Para conseguir iniciar a aplicação será necessário a instalação das depend
 yarn install
 ```
 ou
+
+caso não utilize o Yarn você pode utilizar o npm, basta remover o arquivo yarn.lock de dentro da pasta e rodar o seguir comando.
 ```bash
 npm install
 ``` 
