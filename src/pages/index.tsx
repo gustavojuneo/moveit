@@ -29,7 +29,7 @@ export default function Home(props: HomeProps) {
           <img src="/logo.svg" alt="Move.it" />
 
           <div className={styles.loginContent}>
-            <h2>Bem-vindo</h2>
+            <h2>Bem vindo</h2>
             <p>Entre com</p>
             <button type="button" onClick={() => signIn()}>
               <FaGithub size={26} />
