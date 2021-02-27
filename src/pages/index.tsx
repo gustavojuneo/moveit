@@ -1,15 +1,9 @@
 import Head from 'next/head'
-import { GetServerSideProps } from 'next'
+import Router from 'next/router'
+import { signIn, useSession } from 'next-auth/client'
+import { FaGithub } from 'react-icons/fa'
 
-import { ChallengesProvider } from '../contexts/ChallengesContext'
-import { CompletedChallenges } from '../components/CompletedChallenges'
-import { CountdownProvider } from '../contexts/CountdownContext'
-import { CountDown } from '../components/CountDown'
-import { ExperienceBar } from '../components/ExperienceBar'
-import { Profile } from '../components/Profile'
-import { ChallengeBox } from '../components/ChallengeBox'
-
-import styles from '../styles/pages/Home.module.css'
+import styles from '../styles/pages/Landing.module.css'
 
 interface HomeProps {
   level: number
@@ -18,44 +12,32 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | Move.it</title>
-        </Head>
+  const [session] = useSession()
 
-        <ExperienceBar />
-
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletedChallenges />
-              <CountDown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
-  )
-}
-
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies
-
-  return {
-    props: {
-      level: Number(level ?? 1),
-      currentExperience: Number(currentExperience ?? 0),
-      challengesCompleted: Number(challengesCompleted ?? 0)
-    }
+  if (session) {
+    Router.push('/home')
   }
+
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>Move.it || Acesse nossa Plataforma</title>
+      </Head>
+
+      <div className={styles.landingBox}>
+        <div>
+          <img src="/logo.svg" alt="Move.it" />
+
+          <div className={styles.loginContent}>
+            <h2>Bem-vindo</h2>
+            <p>Entre com</p>
+            <button type="button" onClick={() => signIn()}>
+              <FaGithub size={26} />
+              GITHUB
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
