@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Router from 'next/router'
-import { signIn, useSession } from 'next-auth/client'
+import { getSession, signIn, useSession } from 'next-auth/client'
 import { FaGithub } from 'react-icons/fa'
 
 import styles from '../styles/pages/Landing.module.css'
+import { useEffect } from 'react'
 
 interface HomeProps {
   level: number
@@ -12,10 +13,20 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  const [session] = useSession()
+  const [session, loading] = useSession()
+
+  if (typeof window !== 'undefined' && loading) return null
 
   if (session) {
-    Router.push('/home')
+    useEffect(() => {
+      Router.push('/home')
+    }, [])
+
+    return (
+      <>
+        <p>Carregando...</p>
+      </>
+    )
   }
 
   return (
@@ -31,7 +42,14 @@ export default function Home(props: HomeProps) {
           <div className={styles.loginContent}>
             <h2>Bem vindo</h2>
             <p>Entre com</p>
-            <button type="button" onClick={() => signIn()}>
+            <button
+              type="button"
+              onClick={() =>
+                signIn('github', {
+                  callbackUrl: 'https://imoveit.vercel.app/home'
+                })
+              }
+            >
               <FaGithub size={26} />
               GITHUB
             </button>
@@ -40,4 +58,11 @@ export default function Home(props: HomeProps) {
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps(ctx) {
+  const session = await getSession(ctx)
+  return {
+    props: { session }
+  }
 }

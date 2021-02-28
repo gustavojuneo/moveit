@@ -26,7 +26,6 @@
   transition: color 0.2s;
 }
 
-.navbarContainer nav ul li a.active,
 .navbarContainer nav ul li a:hover {
   color: var(--blue)
 }

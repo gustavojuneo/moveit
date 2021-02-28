@@ -10,7 +10,7 @@ interface Profile {
 }
 
 interface ProfileProps {
-  profile: Profile
+  profile?: Profile
 }
 
 export function Profile({ profile }: ProfileProps) {

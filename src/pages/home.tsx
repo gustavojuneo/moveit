@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 import { GetServerSideProps } from 'next'
 import { signOut, useSession, getSession } from 'next-auth/client'
+import { useEffect } from 'react'
 
 import { ChallengesProvider } from '../contexts/ChallengesContext'
 import { CompletedChallenges } from '../components/CompletedChallenges'
@@ -14,7 +15,19 @@ import { Navbar } from '../components/Navbar'
 
 import styles from '../styles/pages/Home.module.css'
 
+interface User {
+  name: string
+  email: string
+  image: string
+}
+
+interface Session {
+  user: User
+  expires: string
+}
+
 interface HomeProps {
+  session?: Session
   level: number
   currentExperience: number
   challengesCompleted: number
@@ -23,46 +36,57 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
   const [session, loading] = useSession()
 
-  if (loading) return null
+  if (typeof window !== 'undefined' && loading) return null
 
-  if (!loading && !session) {
-    Router.push('/')
+  if (!session) {
+    useEffect(() => {
+      setTimeout(() => {
+        Router.push('/')
+      }, 1000)
+    }, [])
   }
 
-  console.log(session)
+  if (session) {
+    return (
+      <ChallengesProvider
+        level={props.level}
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}
+      >
+        <div className={styles.dashboard}>
+          <div className="aside">
+            <Navbar />
+          </div>
+          <div className={styles.container}>
+            <Head>
+              <title>Início | Move.it</title>
+            </Head>
+
+            <ExperienceBar />
+
+            <CountdownProvider>
+              <section>
+                <div>
+                  <Profile profile={session.user} />
+                  <CompletedChallenges />
+                  <CountDown />
+                </div>
+                <div>
+                  <ChallengeBox />
+                </div>
+              </section>
+            </CountdownProvider>
+          </div>
+        </div>
+      </ChallengesProvider>
+    )
+  }
 
   return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.dashboard}>
-        <div className="aside">
-          <Navbar />
-        </div>
-        <div className={styles.container}>
-          <Head>
-            <title>Início | Move.it</title>
-          </Head>
-
-          <ExperienceBar />
-
-          <CountdownProvider>
-            <section>
-              <div>
-                <Profile profile={session.user} />
-                <CompletedChallenges />
-                <CountDown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
-        </div>
-      </div>
-    </ChallengesProvider>
+    <div className={styles.accessDenied}>
+      <h1>Acesso negado!</h1>
+      <p>Você será redirecionado em alguns instantes.</p>
+    </div>
   )
 }
 
