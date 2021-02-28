@@ -35,6 +35,7 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
   const [session, loading] = useSession()
+  console.log(session)
 
   if (typeof window !== 'undefined' && loading) return null
 
