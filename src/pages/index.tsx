@@ -42,14 +42,7 @@ export default function Home(props: HomeProps) {
           <div className={styles.loginContent}>
             <h2>Bem vindo</h2>
             <p>Entre com</p>
-            <button
-              type="button"
-              onClick={() =>
-                signIn('github', {
-                  callbackUrl: 'https://imoveit.vercel.app/home'
-                })
-              }
-            >
+            <button type="button" onClick={() => signIn('github')}>
               <FaGithub size={26} />
               GITHUB
             </button>
