@@ -1,17 +1,11 @@
 import Head from 'next/head'
 import Router from 'next/router'
 import { GetServerSideProps } from 'next'
-import { signOut, useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import { useEffect } from 'react'
 
-import { ChallengesProvider } from '../contexts/ChallengesContext'
-import { CompletedChallenges } from '../components/CompletedChallenges'
-import { CountdownProvider } from '../contexts/CountdownContext'
-import { CountDown } from '../components/CountDown'
-import { ExperienceBar } from '../components/ExperienceBar'
-import { Profile } from '../components/Profile'
-import { ChallengeBox } from '../components/ChallengeBox'
 import { Navbar } from '../components/Navbar'
+import { LeaderboardTable } from '../components/LeaderboardTable'
 
 import styles from '../styles/pages/Home.module.css'
 
@@ -58,7 +52,7 @@ export default function Home(props: HomeProps) {
         </div>
 
         <div className={styles.container}>
-          <h1>Leaderboard</h1>
+          <LeaderboardTable />
         </div>
       </div>
     )

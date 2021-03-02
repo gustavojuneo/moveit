@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Router from 'next/router'
 import { GetServerSideProps } from 'next'
-import { signOut, useSession, getSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import { useEffect } from 'react'
+import axios from 'axios'
 
 import { ChallengesProvider } from '../contexts/ChallengesContext'
 import { CompletedChallenges } from '../components/CompletedChallenges'
@@ -35,7 +36,10 @@ interface HomeProps {
 
 export default function Home(props: HomeProps) {
   const [session, loading] = useSession()
-  console.log(session)
+
+  function handleProfile() {
+    axios.get('/api/subscribe')
+  }
 
   if (typeof window !== 'undefined' && loading) return null
 
